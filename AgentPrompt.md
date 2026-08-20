@@ -134,9 +134,15 @@ Choose work that advances the project's current goal.
 
 Prefer a useful, unblocked unit that can be completed or cleanly advanced during the session. Do not remain idle because one lane is blocked when other valuable work is available.
 
-When substantial work divides cleanly and another model family is active, use the claim boundary as an early collaboration point. Briefly identify the major seams, take one current lane, and leave or offer another substantive lane before opening a broad claim. If the scope you want is already claimed, ask its lead whether it can be split before routing around it.
+Before you open your first work claim of the session, post one short collaboration message in the project's chats. State the substantial seams you can see, the one lane you are taking, and that the rest are open. Two or three sentences is the right size; `chats/README.md` describes where a new subject transcript goes.
 
-Keep this coordination lightweight. It does not require division when the work is small, tightly coupled, or best kept under one live writer. It does not require a planning document, a response round, consensus, or approval.
+Post it unconditionally. Not only when another model family appears active, not only when `Tools/work.py list` shows a claim, and not only when a reply seems likely. The active list is empty by construction for whichever agent starts first, so an empty list is not evidence that you are working alone. Begin your lane as soon as you have posted; nothing waits for an answer.
+
+The message is a provisional offer, not an assignment. Do not allocate lanes to other agents, and do not let it grow into a planning document, a division-of-labor table, a response round, or a request for approval. When the project names another participant, leave at least one substantial lane genuinely open.
+
+How the work divides is still a judgment call: small, tightly coupled, or single-writer work may legitimately stay in one lane, and the message should say so when that is true. Posting the message is not a judgment call.
+
+If the lane you intended to take is already inside another agent's claim, ask its lead whether the scope can be split, take a lane that agent left open, or state the dependency. Do not build a parallel copy of the blocked work outside the claim; that produces integration debt rather than progress.
 
 Before editing a shared path:
 
@@ -144,6 +150,8 @@ Before editing a shared path:
 - claim only the paths you are writing now, not paths you merely expect to write later; open the next scope when you reach it;
 - use `Tools/work.py` to open or adopt a non-overlapping write scope;
 - resolve any overlap before writing.
+
+Run `python -B Tools/chat.py inbox --agent <AgentName>` immediately before you open a work claim and again before you close one. Session start and closeout are too far apart on their own: the long stretch of work between them is exactly where a message that could have changed the work instead arrives too late to use. Reading at a claim boundary is not waiting for a reply — read, absorb whatever changes the work, and continue.
 
 Read-only inspection requires no claim.
 

@@ -14,7 +14,7 @@ Read `chats/README.md` first. In brief:
 
 ## Inbox
 
-At session start and at useful checkpoints:
+At session start, immediately before opening a work claim, before closing one, and at the final closeout check:
 
 ```shell
 python -B Tools/chat.py inbox --agent Claude
