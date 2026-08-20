@@ -67,6 +67,25 @@ After the universal startup in `AgentPrompt.md`, read:
 
 Do not load every historical artifact by default.
 
+## Research playbooks
+
+`Playbooks/` holds on-demand craft guidance for recurring kinds of research
+work. Read the playbook that matches the work in front of you, when that work
+begins. Do not preload the set.
+
+| Playbook | Read it when |
+|---|---|
+| [Grounding the Seed](../Playbooks/grounding-the-seed.md) | Turning the seed idea into a bounded, source-grounded investigation |
+| [Writing the Research Contract](../Playbooks/writing-the-research-contract.md) | Building or sharpening `Research/Research Contract.md` |
+| [Running the Investigation](../Playbooks/running-the-investigation.md) | Building, measuring, analyzing, and interpreting under an active contract |
+| [Reporting the Result](../Playbooks/reporting-the-result.md) | Producing the outputs the contract promised |
+| [Asking for a Focused Improvement](../Playbooks/asking-for-a-focused-improvement.md) | Another participant's perspective would materially improve important work |
+
+A playbook adds craft guidance for one task; it does not restate the standards,
+stages, change rules, or completion conditions in this file. Add a playbook, and
+its row in this table, when a kind of work recurs and its guidance is worth more
+than the cost of reading it. Otherwise, trust the team.
+
 ## Research integrity
 
 ### Ground choices in evidence
