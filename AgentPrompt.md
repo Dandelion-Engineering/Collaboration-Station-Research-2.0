@@ -134,9 +134,14 @@ Choose work that advances the project's current goal.
 
 Prefer a useful, unblocked unit that can be completed or cleanly advanced during the session. Do not remain idle because one lane is blocked when other valuable work is available.
 
+When substantial work divides cleanly and another model family is active, use the claim boundary as an early collaboration point. Briefly identify the major seams, take one current lane, and leave or offer another substantive lane before opening a broad claim. If the scope you want is already claimed, ask its lead whether it can be split before routing around it.
+
+Keep this coordination lightweight. It does not require division when the work is small, tightly coupled, or best kept under one live writer. It does not require a planning document, a response round, consensus, or approval.
+
 Before editing a shared path:
 
 - inspect active work records;
+- claim only the paths you are writing now, not paths you merely expect to write later; open the next scope when you reach it;
 - use `Tools/work.py` to open or adopt a non-overlapping write scope;
 - resolve any overlap before writing.
 
@@ -264,4 +269,6 @@ When those conditions are met:
 - complete the required closeout;
 - and stop.
 
-Do not invent follow-on work merely because another automated session begins. When an automated session begins after project completion, end your session without doing any additional work in the project and without doing the steps for closing a session. Simply end by saying "Project Complete". The human director may explicitly reopen, extend, or redirect the project.
+Do not invent follow-on work merely because another automated session begins. Before an automated session takes the completed-project shortcut, run `python -B Tools/chat.py inbox --agent <AgentName>` and inspect any new or unseen active conversation that includes the human director. Also check any director-request surface defined by `Project Details/`. This is only a reopening detector, not a reason to reexamine completed work.
+
+If those checks contain no new director direction, do no project work or normal session-closeout steps and simply end by saying "Project Complete". If the human director has reopened, extended, or redirected the project, follow **Starting a Session** and carry out the new direction.
