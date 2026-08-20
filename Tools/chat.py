@@ -5,6 +5,7 @@ Usage:
     python -B Tools/chat.py check "<transcript.md>"
     python -B Tools/chat.py post "<transcript.md>" --agent Claude --session 4 \
         --body-file "<body.md>" --expect-bytes 5728
+    python -B Tools/chat.py human
     python -B Tools/chat.py verify "<transcript.md>"
     python -B Tools/chat.py inbox --agent Claude
     python -B Tools/chat.py wait --agent Claude --timeout 180
@@ -138,6 +139,84 @@ def find_transcripts(agent, root=None):
     return sorted(found)
 
 
+def choose_human_transcript(file_arg, root):
+    active = find_transcripts("Human", root)
+    if not active:
+        die("no active chat transcripts include Human")
+
+    if file_arg:
+        candidate = file_arg if os.path.isabs(file_arg) else os.path.join(root, file_arg)
+        candidate_key = os.path.normcase(os.path.abspath(candidate))
+        by_key = {os.path.normcase(os.path.abspath(path)): path for path in active}
+        if candidate_key not in by_key:
+            die(
+                "the selected file is not an active transcript in a channel that includes Human: %s"
+                % file_arg
+            )
+        return by_key[candidate_key]
+
+    sys.stdout.write("Active chats that include Human:\n")
+    for index, path in enumerate(active, 1):
+        sys.stdout.write("  %d. %s\n" % (index, rel(path, root)))
+    sys.stdout.flush()
+    while True:
+        try:
+            choice = input("Choose a chat by number (or q to cancel): ").strip()
+        except EOFError:
+            sys.stdout.write("\nNo message posted.\n")
+            return None
+        if choice.lower() in ("q", "quit", "cancel"):
+            sys.stdout.write("No message posted.\n")
+            return None
+        try:
+            selected = int(choice)
+        except ValueError:
+            selected = 0
+        if 1 <= selected <= len(active):
+            return active[selected - 1]
+        sys.stdout.write("Enter a number from 1 to %d, or q.\n" % len(active))
+
+
+def human_name(value):
+    if value is None:
+        try:
+            value = input("Your name: ")
+        except EOFError:
+            value = ""
+    value = value.strip()
+    if not value:
+        die("a human name is required")
+    if len(value) > 80 or "\n" in value or "\r" in value or "*" in value:
+        die("the human name must be one line, at most 80 characters, with no asterisks")
+    return value
+
+
+def read_human_body():
+    sys.stdout.write(
+        "Type your message. Finish with a line containing only a single period.\n"
+        "Type :cancel on its own line to leave without posting.\n"
+    )
+    sys.stdout.flush()
+    lines = []
+    while True:
+        try:
+            line = input()
+        except EOFError:
+            sys.stdout.write("No message posted; input ended before the final period.\n")
+            return None
+        if line == ".":
+            break
+        if line == ":cancel":
+            sys.stdout.write("No message posted.\n")
+            return None
+        lines.append(line)
+    body = "\n".join(lines).strip()
+    if not body:
+        sys.stdout.write("No message posted; the message was empty.\n")
+        return None
+    return body
+
+
 def load_state(agent, root=None):
     path = state_path(agent, root)
     if not os.path.exists(path):
@@ -228,58 +307,50 @@ def cmd_check(args):
     return OK
 
 
-def cmd_post(args):
-    if not os.path.exists(args.file):
-        die(
-            "transcript does not exist: %s\n"
-            "         Create the chat folder and file first; this tool only appends." % args.file
+def report_stale(expected_bytes, current, expected_data=None):
+    delta = len(current) - expected_bytes
+    sys.stdout.write("REFUSED: the transcript changed while you were composing.\n")
+    sys.stdout.write("  you read : %d bytes\n" % expected_bytes)
+    sys.stdout.write("  now      : %d bytes (%+d)\n" % (len(current), delta))
+    append_only = expected_data is None or current.startswith(expected_data)
+    if delta > 0 and append_only:
+        sys.stdout.write("\n--- arrived while you were composing ---\n")
+        sys.stdout.write(show(current[expected_bytes:]))
+        sys.stdout.write("--- end ---\n")
+        sys.stdout.write("\nRead the new message before deciding what to post.\n")
+    elif delta < 0:
+        sys.stdout.write(
+            "\nThe file SHRANK. Someone overwrote or truncated it. Do not post.\n"
+            "Recover it from Git before writing anything.\n"
         )
-    before = read_bytes(args.file)
-    if len(before) != args.expect_bytes:
-        delta = len(before) - args.expect_bytes
-        sys.stdout.write("REFUSED: the transcript changed since you read it.\n")
-        sys.stdout.write("  you read : %d bytes\n" % args.expect_bytes)
-        sys.stdout.write("  now      : %d bytes (%+d)\n" % (len(before), delta))
-        if delta > 0:
-            sys.stdout.write("\n--- arrived while you were composing ---\n")
-            sys.stdout.write(show(before[args.expect_bytes :]))
-            sys.stdout.write("--- end ---\n")
-            sys.stdout.write(
-                "\nRead the above, revise if it changes your message, then post again\n"
-                "with --expect-bytes %d\n" % len(before)
-            )
-        else:
-            sys.stdout.write(
-                "\nThe file SHRANK. Someone overwrote or truncated it. Do not post.\n"
-                "Recover it from git before writing anything.\n"
-            )
-        return PROBLEM
+    else:
+        sys.stdout.write(
+            "\nThe earlier bytes changed instead of receiving a clean append. Do not post.\n"
+            "Inspect the transcript and recover its append-only history first.\n"
+        )
+    return PROBLEM
 
-    body = read_bytes(args.body_file).decode("utf-8").strip()
-    if not body:
-        die("body file is empty: %s" % args.body_file)
 
+def append_message(path, before, header, body, stamp, root=None, checkpoint_agent=None, dry_run=False):
     eol, _, bare_lf_b, bare_cr_b = detect_eol(before)
-    stamp = timestamp()
-    header = "**%s (Session %s, %s):**" % (args.agent, args.session, stamp)
     lead = "" if (before.endswith(LF) or len(before) == 0) else "\n"
     block = normalize("%s\n---\n\n%s\n\n%s\n" % (lead, header, body), eol)
     block_bytes = block.encode("utf-8")
 
-    if args.dry_run:
+    if dry_run:
         sys.stdout.write("DRY RUN - nothing written.\n")
-        sys.stdout.write("target      : %s\n" % args.file)
+        sys.stdout.write("target      : %s\n" % path)
         sys.stdout.write("line endings: %s\n" % ("CRLF" if eol == CRLF else "LF"))
         sys.stdout.write("appending   : %d bytes\n" % len(block_bytes))
         sys.stdout.write("header      : %s\n" % header)
         return OK
 
-    with open(args.file, "ab") as fh:
+    with open(path, "ab") as fh:
         fh.write(block_bytes)
         fh.flush()
         os.fsync(fh.fileno())
 
-    after = read_bytes(args.file)
+    after = read_bytes(path)
     problems = []
     notes = []
     if not after.startswith(before):
@@ -327,21 +398,23 @@ def cmd_post(args):
         )
         return POSTED_UNVERIFIED
 
-    root = getattr(args, "root", None) or repo_root()
-    state = load_state(args.agent, root)
-    key = rel(args.file, root)
-    prior = state["files"].get(key)
     unread_bytes = 0
-    if prior is not None:
-        read_through = prior["bytes"] == len(before) and sha256_hex(before) == prior["sha256"]
-        if read_through:
-            state["files"][key] = {"bytes": len(after), "sha256": sha256_hex(after), "marked": stamp}
-            save_state(args.agent, state, root)
-        else:
-            unread_bytes = len(before) - prior["bytes"]
+    prior = None
+    if checkpoint_agent:
+        root = root or repo_root()
+        state = load_state(checkpoint_agent, root)
+        key = rel(path, root)
+        prior = state["files"].get(key)
+        if prior is not None:
+            read_through = prior["bytes"] == len(before) and sha256_hex(before) == prior["sha256"]
+            if read_through:
+                state["files"][key] = {"bytes": len(after), "sha256": sha256_hex(after), "marked": stamp}
+                save_state(checkpoint_agent, state, root)
+            else:
+                unread_bytes = len(before) - prior["bytes"]
 
     sys.stdout.write("POSTED and verified.\n")
-    sys.stdout.write("  file    : %s\n" % args.file)
+    sys.stdout.write("  file    : %s\n" % path)
     sys.stdout.write("  header  : %s\n" % header)
     sys.stdout.write("  bytes   : %d -> %d (+%d)\n" % (len(before), len(after), len(block_bytes)))
     sys.stdout.write("  endings : %s preserved\n" % ("CRLF" if eol == CRLF else "LF"))
@@ -355,6 +428,54 @@ def cmd_post(args):
             % (unread_bytes, prior["bytes"])
         )
     return OK
+
+
+def cmd_post(args):
+    if not os.path.exists(args.file):
+        die(
+            "transcript does not exist: %s\n"
+            "         Create the chat folder and file first; this tool only appends." % args.file
+        )
+    before = read_bytes(args.file)
+    if len(before) != args.expect_bytes:
+        return report_stale(args.expect_bytes, before)
+    if not os.path.exists(args.body_file):
+        die("body file does not exist: %s" % args.body_file)
+    body = read_bytes(args.body_file).decode("utf-8").strip()
+    if not body:
+        die("body file is empty: %s" % args.body_file)
+    stamp = timestamp()
+    header = "**%s (Session %s, %s):**" % (args.agent, args.session, stamp)
+    root = args.root or repo_root()
+    return append_message(
+        args.file,
+        before,
+        header,
+        body,
+        stamp,
+        root=root,
+        checkpoint_agent=args.agent,
+        dry_run=args.dry_run,
+    )
+
+
+def cmd_human(args):
+    root = args.root or repo_root()
+    path = choose_human_transcript(args.file, root)
+    if path is None:
+        return OK
+    name = human_name(args.name)
+    before = read_bytes(path)
+    sys.stdout.write("Selected: %s (%d bytes)\n" % (rel(path, root), len(before)))
+    body = read_human_body()
+    if body is None:
+        return OK
+    current = read_bytes(path)
+    if current != before:
+        return report_stale(len(before), current, expected_data=before)
+    stamp = timestamp()
+    header = "**%s (%s):**" % (name, stamp)
+    return append_message(path, before, header, body, stamp, root=root, dry_run=args.dry_run)
 
 
 def cmd_verify(args):
@@ -378,14 +499,22 @@ def cmd_verify(args):
     if "�" in text:
         problems.append("contains a replacement character (encoding damage)")
     headers = re.findall(r"^\*\*(.+?)\s*\(Session\s+(\S+?),\s*(.+?)\):\*\*", text, re.MULTILINE)
+    human_headers = re.findall(
+        r"^\*\*(.+?)\s*\((\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}\s+[^)]+)\):\*\*",
+        text,
+        re.MULTILINE,
+    )
     plain = re.findall(r"^\*\*([A-Za-z]+):\*\*", text, re.MULTILINE)
     sys.stdout.write("file          : %s\n" % args.file)
     sys.stdout.write("bytes         : %d\n" % len(data))
     sys.stdout.write("line endings  : %s\n" % ("CRLF" if eol == CRLF else "LF"))
     sys.stdout.write("agent messages: %d\n" % len(headers))
+    sys.stdout.write("human messages: %d\n" % len(human_headers))
     sys.stdout.write("plain headers : %d %s\n" % (len(plain), sorted(set(plain)) if plain else ""))
     for who, session, when in headers:
         sys.stdout.write("  - %-8s session %-4s %s\n" % (who, session, when))
+    for who, when in human_headers:
+        sys.stdout.write("  - %-8s human       %s\n" % (who, when))
     if problems:
         sys.stdout.write("\nPROBLEMS:\n")
         for problem in problems:
@@ -524,6 +653,12 @@ def main(argv=None):
     p_post.add_argument("--dry-run", action="store_true")
     p_post.add_argument("--root", default=None, help=argparse.SUPPRESS)
     p_post.set_defaults(func=cmd_post)
+    p_human = subs.add_parser("human", help="choose an active human chat and append a timestamped message")
+    p_human.add_argument("file", nargs="?", help="optional active transcript; omit to choose from a list")
+    p_human.add_argument("--name", help="your display name; prompted when omitted")
+    p_human.add_argument("--dry-run", action="store_true")
+    p_human.add_argument("--root", default=None, help=argparse.SUPPRESS)
+    p_human.set_defaults(func=cmd_human)
     p_verify = subs.add_parser("verify", help="integrity check an existing transcript")
     p_verify.add_argument("file")
     p_verify.set_defaults(func=cmd_verify)

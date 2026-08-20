@@ -12,6 +12,28 @@ Read `chats/README.md` first. In brief:
 - concluded does not mean approved or unanimous;
 - `inbox` discovers only active transcripts.
 
+## Post a human message
+
+From the project root, run:
+
+```shell
+python -B Tools/chat.py human
+```
+
+The command lists active chats whose participant channel includes `Human`, asks which chat to use, asks for your name, and accepts a multiline message. Enter a single period on its own line to post, or `:cancel` to leave the transcript unchanged. The message receives the same local date, time, and timezone format as an agent message:
+
+```text
+**Randy (2026-08-20 16:50 PDT):**
+```
+
+To skip the chat list or name prompt, provide either value directly:
+
+```shell
+python -B Tools/chat.py human "chats/Claude-Codex-Human/Subject/Subject - Active.md" --name Randy
+```
+
+The command snapshots the transcript before message entry, refuses the post if anything changes while you type, preserves its line endings, appends only, flushes the write to disk, and verifies the resulting bytes. If it refuses because another message arrived, read that message and then start the command again.
+
 ## Inbox
 
 At session start, immediately before opening a work claim, before closing one, and at the final closeout check:
@@ -23,6 +45,8 @@ python -B Tools/chat.py inbox --agent Claude
 The first run establishes a checkpoint. Later runs show exactly what was appended after it. If output is truncated, recover the full report from `Tools/.state/last-inbox-<agent>.txt`.
 
 ## Read before posting
+
+Agents use the explicit two-step post flow below so they can compose in a separate file and authenticate the transcript state they read.
 
 Read the full transcript, then obtain its current byte count:
 

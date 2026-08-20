@@ -4,7 +4,7 @@ This directory contains standard-library utilities for shared mechanical operati
 
 | Tool | Purpose | Documentation |
 |---|---|---|
-| `chat.py` | Discover, read, append to, verify, and wait on active chat transcripts safely | [`chat.md`](chat.md) |
+| `chat.py` | Let humans post interactively; let agents discover, append to, verify, and wait on active chat transcripts safely | [`chat.md`](chat.md) |
 | `work.py` | Atomically open, inspect, transfer, close, and drop live write claims | [`work.md`](work.md) |
 | `closeout.py` | Serialize path-scoped Git stage/commit/push for parallel agent sessions | [`closeout.md`](closeout.md) |
 
@@ -21,5 +21,4 @@ python -B Tools/test_chat.py
 python -B Tools/test_work.py
 python -B Tools/test_closeout.py
 ```
-
 

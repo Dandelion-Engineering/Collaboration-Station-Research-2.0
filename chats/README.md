@@ -62,4 +62,12 @@ Avoid generic names such as `Discussion`, `Updates`, or `Review` when a more spe
 
 After an active transcript is created, do not hand-edit it. Read and append through `Tools/chat.py`, documented in `Tools/chat.md`.
 
+For a human participant, the safe path is one interactive command from the project root:
+
+```shell
+python -B Tools/chat.py human
+```
+
+It lists active human chats, prompts for the destination, name, and message, adds the local date and time, and verifies the append. A human can therefore contribute without editing transcript syntax or coordinating byte counts manually.
+
 The inbox discovers files ending in `Active.md` inside channel folders naming the agent. Concluded transcripts are intentionally absent from the active inbox.
