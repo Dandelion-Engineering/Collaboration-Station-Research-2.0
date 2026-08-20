@@ -5,7 +5,7 @@ This folder holds Codex's continuity and agent-specific project materials.
 ## Core files
 
 - `Summary of Only Necessary Context.md` — rewritten at session close; contains only what the next Codex session needs to resume.
-- `Session Summaries/` — numbered human-readable records of completed sessions.
+- `Session Summaries/` — one `HumanReport<N>.md` per completed session.
 - `Progress Reports/` — director-facing reports when this project requires them.
 
 ## Maintenance

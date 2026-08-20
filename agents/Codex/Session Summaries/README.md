@@ -1,6 +1,6 @@
 # Session Summaries
 
-Create one numbered human-readable report for each completed session.
+Write one human report for each completed session, named `HumanReport<N>.md`, where `<N>` is the session number: `HumanReport1.md`, `HumanReport2.md`, and so on. No title in the filename and no zero padding.
 
 A useful report records:
 

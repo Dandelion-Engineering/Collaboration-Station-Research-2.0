@@ -87,6 +87,11 @@ require a response.
 Use the supported chat tools to discover and reply to active conversations.
 Do not manually edit chat transcripts.
 
+Check the inbox immediately before you create a new subject. If an active
+subject already covers what you are about to say, post there instead of opening
+a parallel transcript. Two transcripts on one subject split the record, and
+each agent then acts on half of it.
+
 Conclude a chat when its immediate purpose has been served or no further
 response is needed. `Concluded` means the conversation ended, not that every
 participant approved the same conclusion. If the subject needs discussion
@@ -134,7 +139,7 @@ Choose work that advances the project's current goal.
 
 Prefer a useful, unblocked unit that can be completed or cleanly advanced during the session. Do not remain idle because one lane is blocked when other valuable work is available.
 
-Before you open your first work claim of the session, post one short collaboration message in the project's chats. State the substantial seams you can see, the one lane you are taking, and that the rest are open. Two or three sentences is the right size; `chats/README.md` describes where a new subject transcript goes.
+Before you open your first work claim of the session, post one short collaboration message in the project's chats. State the substantial seams you can see, the one lane you are taking, and that the rest are open. Two or three sentences is the right size. If another agent has already posted its seams for this session, reply in that transcript rather than starting a second one; `chats/README.md` describes where a genuinely new subject goes.
 
 Post it unconditionally. Not only when another model family appears active, not only when `Tools/work.py list` shows a claim, and not only when a reply seems likely. The active list is empty by construction for whichever agent starts first, so an empty list is not evidence that you are working alone. Begin your lane as soon as you have posted; nothing waits for an answer.
 
@@ -246,9 +251,9 @@ Complete the session in this order:
 1. Leave the working tree and any partially completed work coherent.
 2. Update, close, or hand off the relevant work claim.
 3. Record any handoff or dependency another participant needs.
-4. Write the required human-readable session summary.
-5. Rewrite `Summary of Only Necessary Context.md` so a future session can resume without reconstruction.
-6. Update your workspace `README.md` only when its navigation or structure changed.
+4. Write the session's human report to `agents/<AgentName>/Session Summaries/HumanReport<N>.md`, where `<N>` is the session number. Use that exact name: no title in the filename and no zero padding.
+5. Rewrite `Summary of Only Necessary Context.md` so a future session can resume without reconstruction. Rewrite it rather than appending to it, and delete what the next session no longer needs: settled questions, superseded state, and history a human report already holds. It is a resume file, not a running log, and it should not grow as the project does.
+6. Update your workspace `README.md` only when its navigation or structure changed. Keep it to navigation, and drop entries for files that no longer exist.
 7. Complete any project-specific closeout required by `Project Details/` or a relevant playbook.
 8. Run the **final chat inbox check**:
 
