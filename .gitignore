@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Tool runtime state
+Tools/.state/
+.closeout-session.lock
+Work/.work-tool.lock
+.codex-session.lock
+.claude-session.lock
+.agent-turn
+
+# Temporary files
+*.tmp
+*.temp

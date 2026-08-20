@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use or adapt this framework, please cite it using this metadata."
+title: "Collaboration Station Research 2.0"
+type: software
+version: "2.0.0"
+date-released: 2026-08-19
+authors:
+  - family-names: Crespo
+    given-names: Randy
+    affiliation: Dandelion Engineering
+abstract: >-
+  Collaboration Station Research 2.0 is a filesystem-native template for
+  long-running exploratory research by a human director and capable AI agents.
+  It adds a compact research contract, visible consequential changes, evidence
+  provenance, honest outcome boundaries, and proportionate reproducibility to
+  the Collaboration Station 2.0 scaffold while avoiding mandatory AI approval
+  cycles and fixed writer-reviewer roles.
+keywords:
+  - AI agents
+  - exploratory research
+  - research methodology
+  - reproducibility
+  - multi-agent collaboration
