@@ -1,6 +1,6 @@
 # Asking for a Focused Improvement
 
-Read this when another participant's perspective would materially improve
+Read this when another agent's perspective would materially improve
 important work.
 
 A focused improvement is one contribution, in one direction. The responsible

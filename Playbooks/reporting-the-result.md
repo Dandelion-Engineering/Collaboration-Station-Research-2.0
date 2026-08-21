@@ -11,7 +11,7 @@ methods, comparisons, exclusions, deviations, and limitations needed to
 understand that answer.
 
 Small projects can satisfy this with a single report. Larger ones may separate
-it into a technical account, a public explanation, and supporting records. The
+it into a technical account, supporting records, etc. The
 contract decides the output set; the reader can judge whether it serves its
 purpose.
 
@@ -76,6 +76,8 @@ reproduce the numbers the conclusion depends on. Where it cannot cover something
 — private data, hardware, cost, runtime — say so explicitly and describe what
 would be needed. An untested packet is a claim about reproducibility rather than
 evidence of it.
+
+**Must be reproducible on any machine not just the one used**
 
 ## Optional outputs, and when each earns its place
 

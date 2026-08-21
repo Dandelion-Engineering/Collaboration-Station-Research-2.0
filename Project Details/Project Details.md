@@ -82,9 +82,8 @@ research layer, use:
    evidence roles, methods, outcome boundaries, and required outputs;
 3. `Research/Changes.md` for dated consequential changes to the contract;
 4. `Research/Questions.md` for questions, defaults, answers, and closures;
-5. `Research/Status.md` for the compact current state;
-6. current methods, code, data records, and outputs for what was actually done;
-7. `Research/References.md` for source, data, software, and material provenance.
+5. `Research/Status.md` for the compact current state; current methods, code, data records, and outputs for what was actually done;
+6. `Research/References.md` for source, data, software, and material provenance.
 
 Historical plans and chats explain how the work developed. They do not override
 the active contract and its visible change record.
@@ -292,3 +291,5 @@ The project is complete when:
 Researcher answers are not a completion condition. The project finishes on the
 strongest honest result available within the seed's purpose and its declared
 constraints.
+
+**Claude and Codex are the agents participating in this project**
