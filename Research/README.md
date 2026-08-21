@@ -7,8 +7,9 @@ research itself.
 |---|---|
 | `Research Contract.md` | Current question, intended claim, evidence roles, methods, outcome boundaries, and promised outputs |
 | `Changes.md` | Append-only record of consequential changes to the active contract |
+| `Questions.md` | Append-only researcher questions, defaults, answers, and closures |
 | `Status.md` | Compact current state, updated at material events |
-| `References.md` | Shared source and data-provenance ledger |
+| `References.md` | Shared source, data, software, and material-provenance ledger |
 
 Detailed methods, code, analyses, and deliverables may live elsewhere as the
 project requires. Keep this folder navigational rather than turning it into a

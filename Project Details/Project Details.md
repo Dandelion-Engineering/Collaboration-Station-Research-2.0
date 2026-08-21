@@ -5,6 +5,9 @@ The researcher provides the seed below. The agents do the grounding, scope the
 investigation, build the Research Contract, conduct the work, and produce the
 outputs the resulting claim actually needs.
 
+In this research layer, **researcher** means the human director named in
+`AgentPrompt.md`.
+
 ## Seed idea — researcher input
 
 Replace the single placeholder below. Write as much or as little as you have: a
@@ -22,22 +25,52 @@ but they do not silently replace its purpose.
 
 The first sessions translate the seed into an active
 `Research/Research Contract.md`. Agents should infer routine details, research
-the field, inspect any named resources, and choose defensible defaults. They do
-not make the researcher complete a questionnaire before work can begin.
+the field, inspect any named resources, actively look for suitable public
+datasets, software, models, tools, and other online materials when none are
+provided, and choose defensible defaults. They do not make the researcher
+complete a questionnaire before work can begin.
 
-Ask the researcher only when:
+### Keep the investigation proportionate and researchable
 
-- different interpretations would produce materially different projects and
-  the seed does not support a responsible choice;
-- access, identity, consent, private data, credentials, spending, publication,
-  or another human-only action is required;
-- the seed contains conflicting protected constraints; or
-- proceeding would create a meaningful safety, legal, ethical, or privacy risk.
+Match the investigation to the ambition of the seed and to the available
+compute, time, money, materials, access, safety, and legal boundaries.
 
-When the ideal project is not feasible, preserve the underlying purpose and
-choose the closest useful investigation that can honestly be answered with the
-available evidence. Record the boundary in the contract. Do not substitute an
-easier question merely because it is easier.
+- When established science can answer the question, use the strongest relevant
+  established methods rather than inventing novelty for its own sake.
+- When no adequate method is established, make a bounded creative attempt:
+  inspect adjacent fields for transferable methods, combine compatible ideas,
+  or develop a new approach. A new approach carries a high evidential burden;
+  test the properties needed for the claim against strong alternatives,
+  controls, and known cases before relying on it.
+- If the ideal study remains infeasible after an honest, contract-bounded
+  attempt, reduce it to the closest useful rung that still serves the seed's
+  purpose. That rung may be a feasibility study, data audit, benchmark,
+  simulation, theoretical analysis, method prototype, experimental design, or
+  proof of a current limit.
+
+Do not end at “no research project can be done.” Every seed should produce the
+most informative feasible project and an honest result, even when that result
+only establishes what can be tested now, what failed, and what a stronger study
+would require. Record material scope changes in `Research/Changes.md`; do not
+silently replace the seed with an unrelated easier question.
+
+### Questions do not create a wait state
+
+Agents may ask for preferences, clarification, or human-only authority whenever
+an answer would help. Record each question in the append-only
+`Research/Questions.md` register and link any active chat.
+
+Treat `Research/Questions.md` as the project-specific researcher-request surface
+referenced by `AgentPrompt.md`; inspect it before using the completed-project
+shortcut.
+
+An advisory question states the defensible default already in force, and work
+continues. An authority question defaults to **do not take the restricted
+action**; agents route around it, narrow the result honestly, or finish in a
+bounded authority-blocked state. An unanswered question never authorizes
+access, consent, spending, publication, external contact, a material change of
+purpose, or another human-only action. If a default changes a research boundary,
+record the change separately in `Research/Changes.md`.
 
 ## Research sources of truth
 
@@ -48,9 +81,10 @@ research layer, use:
 2. `Research/Research Contract.md` for the active question, intended claim,
    evidence roles, methods, outcome boundaries, and required outputs;
 3. `Research/Changes.md` for dated consequential changes to the contract;
-4. `Research/Status.md` for the compact current state;
-5. current methods, code, data records, and outputs for what was actually done;
-6. `Research/References.md` for source and data provenance.
+4. `Research/Questions.md` for questions, defaults, answers, and closures;
+5. `Research/Status.md` for the compact current state;
+6. current methods, code, data records, and outputs for what was actually done;
+7. `Research/References.md` for source, data, software, and material provenance.
 
 Historical plans and chats explain how the work developed. They do not override
 the active contract and its visible change record.
@@ -62,7 +96,8 @@ After the universal startup in `AgentPrompt.md`, read:
 1. `Research/Status.md`;
 2. `Research/Research Contract.md`;
 3. the latest relevant entries in `Research/Changes.md`;
-4. only the methods, outputs, sources, chats, and playbooks needed for the work
+4. open events in `Research/Questions.md` that affect the selected work;
+5. only the methods, outputs, sources, chats, and playbooks needed for the work
    selected.
 
 Do not load every historical artifact by default.
@@ -92,15 +127,22 @@ than the cost of reading it. Otherwise, trust the team.
 
 Begin method, dataset, baseline, control, metric, and reporting choices with
 credible sources and current field practice. Record a source when it affects a
-decision. When the field supplies no adequate method, state what is new, why it
-is needed, and how it will be tested.
+decision. When the seed does not provide materials, search for fit-for-purpose
+public datasets, software, models, tools, and other accessible resources before
+concluding they are unavailable. Verify provenance, version, license, consent,
+security, compatibility, and practical cost before depending on them.
+
+When the field supplies no adequate method, state what is new, why it is needed,
+which established or cross-field ideas it builds on, and how the properties
+needed for the claim will be tested. Novelty is not evidence of correctness.
 
 ### Make the intended claim visible before results can reshape it
 
 Activate the Research Contract before examining evidence designated there as
 confirmatory or held out. The contract states the question, intended claim,
 inputs, methods, strongest relevant comparisons, evaluation, and what would
-count as success, failure, inconclusive, or non-transfer.
+count as success, failure, inconclusive, non-transfer, blocked by unavailable
+evidence, or blocked by unavailable authority.
 
 Exploratory work may precede activation when it is clearly labelled and cannot
 silently become confirmatory evidence.
@@ -114,7 +156,7 @@ held out.
 
 Use mechanical protections when the claim needs them: fixed splits, immutable
 manifests, seeded procedures, append-only records, or executable checks. Match
-the protection to the actual risk; do not substitute a universal review ritual.
+the protection to the actual risk.
 
 ### Use strong comparisons and controls
 
@@ -147,7 +189,7 @@ stronger one.
 
 ## How the research moves
 
-These stages describe the work; they are not AI approval gates.
+These stages describe the work and may overlap when evidence roles remain clear.
 
 1. **Frame and ground.** Sharpen the seed, inspect the field, and identify the
    materials, risks, strongest baselines, and plausible outcome shapes.
@@ -161,8 +203,7 @@ These stages describe the work; they are not AI approval gates.
 
 Stages may overlap. A method can be prototyped while the contract is being
 sharpened if its evidence remains exploratory. Drafting can begin before all
-analysis ends. Work moves forward when its necessary state is usable, not when
-an AI signs it.
+analysis ends. Work moves forward when its necessary state is usable.
 
 ## Changing the research plan
 
@@ -178,30 +219,12 @@ the clean current state in the Research Contract and link the change entry.
 Routine implementation choices and corrections that do not move a research
 boundary belong in code, methods, or session records, not the change log.
 
-## Collaboration model
-
-One agent leads each live write scope through `Work/`. Other participants may
-contribute independent analysis, alternatives, counterexamples, or one focused
-improvement pass when that adds information.
-
-For a focused improvement:
-
-1. ask a bounded question and identify the artifact or decision it concerns;
-2. the contributor returns one set of improvements or an independent result;
-3. the responsible agent decides what to use, records material uncertainty,
-   and moves forward.
-
-An improvement is not approval. It creates no required response round,
-reinspection, exact-state signature, or consensus requirement. Later use may
-reveal defects; material defects are corrected in the current state and carried
-into future outputs.
-
 ## Human authority
 
 Agents own routine research, design, implementation, analysis, documentation,
 and local validation within the seed's purpose and the active contract.
 
-The human director is required for:
+The researcher is required for:
 
 - identity, credentials, consent, or access that belongs to a person;
 - spending, purchases, contracts, or paid accounts;
@@ -210,19 +233,22 @@ The human director is required for:
 - destructive or irreversible external actions;
 - a material change to the seed's purpose.
 
-If one lane needs the director, open a focused human chat that states what is
-needed, why, what is blocked, and any fallback, then continue other useful work.
-Silence is not permission.
+An unanswered authority question does not authorize its action. Record the
+default and its effect in `Research/Questions.md`.
 
 ## Keeping the researcher informed
 
-`Research/Status.md` is the compact current-state surface. Update it when the
-question changes, a consequential change is adopted, a major result or blocker
-appears, a required output becomes usable, or the project concludes. Do not
-turn it into a session journal.
+`Research/Status.md` is the compact current-state surface. Its next-action field
+names the project's next useful action; each agent's continuity summary names
+that agent's next resumable action. Update Status when the question changes, a
+consequential change is adopted, a major result or blocker appears, a required
+output becomes usable, or the project concludes. Do not turn it into a session
+journal.
 
-Session summaries preserve detailed work. Focused chats carry questions that
-need a response. Final outputs carry the durable result.
+`Research/Status.md` also reports the number of open questions and points to
+`Research/Questions.md`. The register preserves defaults and the effects of any
+answers; focused chats carry the conversation. Final outputs carry the durable
+result.
 
 ## Required outputs
 
@@ -239,6 +265,11 @@ These may be combined. A technical report, public explainer, study guide,
 dashboard, dataset card, or full reproducibility packet is required only when
 the contract identifies a reader or boundary that needs it.
 
+If unavailable evidence or authority prevents a promised output, the final
+result record replaces any pretense of completion with the unavailable
+prerequisite, the output it prevented, the bounded work completed, and the
+condition under which a successor could resume.
+
 ## Completion
 
 The project is complete when:
@@ -246,15 +277,18 @@ The project is complete when:
 - the active Research Contract is coherent and its consequential changes are
   visible;
 - the question is answered as success, failure, inconclusive, non-transfer, or
-  explicitly blocked by unavailable evidence;
-- the outputs promised in the contract exist and agree with one another;
+  explicitly blocked by unavailable evidence or unavailable authority;
+- the outputs promised in the contract exist and agree with one another, or a
+  terminal blocked record accounts explicitly for each prevented output;
 - important baselines, controls, exclusions, deviations, and limitations are
   reported;
 - the promised reproduction or verification path works to the degree claimed;
+- every unanswered question has an explicit default, and its effect is reflected
+  in the contract, changes, or final result as appropriate;
 - `Research/Status.md` records the terminal state and useful next guidance;
 - no unresolved template placeholder remains in a project-authored output;
 - relevant tool and project checks pass.
 
-Completion does not require every possible improvement, AI consensus, a Review
-Card, a second inspection of revisions, or resolution of every difference in
-judgment.
+Researcher answers are not a completion condition. The project finishes on the
+strongest honest result available within the seed's purpose and its declared
+constraints.

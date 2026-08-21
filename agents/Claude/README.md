@@ -6,7 +6,6 @@ This folder holds Claude's continuity and agent-specific project materials.
 
 - `Summary of Only Necessary Context.md` — rewritten at session close; contains only what the next Claude session needs to resume.
 - `Session Summaries/` — one `HumanReport<N>.md` per completed session.
-- `Progress Reports/` — director-facing reports when this project requires them.
 
 ## Maintenance
 

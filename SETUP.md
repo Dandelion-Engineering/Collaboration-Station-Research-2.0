@@ -22,8 +22,9 @@ written after launch so the original intent remains inspectable.
 1. Copy the complete template to a new project folder.
 2. Put the seed idea in the one location above.
 3. Ensure Python 3 and Git are available.
-4. Initialize the folder as a Git repository and connect the private or public
-   remote appropriate for the project. Do not publish merely as part of setup.
+4. Initialize the folder as a Git repository. Connect the private or public
+   remote appropriate for the project when one is wanted; do not publish merely
+   as part of setup.
 5. Make the initial commit before agent work begins.
 6. Give each agent filesystem access to the same project root.
 
@@ -70,11 +71,18 @@ not replace `Work/` claims, which coordinate writes between different agents.
 The first useful sessions should:
 
 1. read the seed without demanding a more formal restatement;
-2. inspect any resources it names and ground missing choices in credible sources;
-3. choose the closest useful investigation that preserves the seed's purpose;
-4. build the Research Contract and record material uncertainty;
-5. begin exploratory work that can proceed safely while the contract is drafted;
-6. activate the contract before accessing evidence designated confirmatory or
+2. inspect any resources it names, and search for suitable public datasets,
+   software, models, tools, and other online materials when inputs are missing;
+3. use established methods when they fit; when they do not, make a bounded
+   cross-field, adaptation, or novel-method attempt with an explicit validation
+   burden and stopping rule;
+4. choose the closest useful investigation that preserves the seed's purpose
+   and fits the available compute, time, money, materials, access, safety, and
+   legal boundaries;
+5. record helpful researcher questions with live defaults instead of waiting;
+6. build the Research Contract and record material uncertainty;
+7. begin exploratory work that can proceed safely while the contract is drafted;
+8. activate the contract before accessing evidence designated confirmatory or
    held out.
 
 If a seed is already detailed, agents should use that detail rather than
@@ -91,8 +99,10 @@ python -B Tools/test_work.py
 python -B Tools/test_closeout.py
 ```
 
-Before the first real closeout, verify that the configured Git remote accepts a
-normal push from the environment in which agent sessions run.
+When a Git remote is configured, verify before the first real closeout that it
+accepts a normal push from the environment in which agent sessions run. Without
+a remote, `Tools/closeout.py` commits locally, reports that no push occurred,
+and ends the session successfully.
 
 ## Publication and citation
 

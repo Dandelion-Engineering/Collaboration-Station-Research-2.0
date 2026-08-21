@@ -264,11 +264,11 @@ Complete the session in this order:
    This happens **before Git closeout**. If a new message materially changes the work, handoff, work claim, or continuity state, resume the session, make the needed changes, update the durable files, and then run the final inbox check again. Do not wait merely for approval, acknowledgement, or optional feedback.
 
 9. When the work, handoff, continuity files, work claims, and final inbox are settled, preview the exact paths belonging to the session with `Tools/closeout.py --dry-run`.
-10. Review the preview, then run the same `Tools/closeout.py` command without `--dry-run` to commit and push.
+10. Review the preview, then run the same `Tools/closeout.py` command without `--dry-run` to commit and, when an upstream is configured, push.
 
 Exact closeout commands and behavior are documented in `Tools/closeout.md`.
 
-A successful non-dry-run `closeout.py` is the **final action of the session**. Once it commits and pushes, the session is over. Do not check chats again, edit files, update reports, or perform more project work. Anything that happens after the push belongs to a new session.
+A successful non-dry-run `closeout.py` is the **final action of the session**. Once it commits and completes any configured push, the session is over. Do not check chats again, edit files, update reports, or perform more project work. Anything that happens afterward belongs to a new session.
 
 ---
 

@@ -21,7 +21,13 @@ None yet.
 
 None yet.
 
-## Next valuable action
+## Open researcher questions
+
+**Open count:** 0
+
+See `Research/Questions.md` for defaults, answers, and closures.
+
+## Project's next valuable action
 
 Read the seed, inspect the relevant field and any named resources, then draft
 `Research/Research Contract.md` without requiring another setup form from the
@@ -36,5 +42,6 @@ researcher.
 
 Update this file only when the question changes, a consequential change is
 adopted, a major result or blocker appears, a required output becomes usable,
-or the project concludes. Keep it compact and current; detailed chronology
-belongs in session summaries and `Research/Changes.md`.
+the open-question count changes, or the project concludes. Keep it compact and
+current; detailed chronology belongs in session summaries,
+`Research/Questions.md`, and `Research/Changes.md`.

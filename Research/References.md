@@ -15,7 +15,7 @@ when adding it; do not reconstruct citations from memory at project end.
 - **How it informed this project:** `{{DECISION_BASELINE_THRESHOLD_CONTROL_OR_INTERPRETATION}}`
 - **Important caveat:** `{{LIMIT_OR_NONE}}`
 
-## Dataset or material entry template
+## Dataset, software, model, tool, or material entry template
 
 ### `{{DATASET_OR_MATERIAL_NAME}}`
 
@@ -24,6 +24,7 @@ when adding it; do not reconstruct citations from memory at project end.
 - **Version or retrieval date:** `{{VERSION_OR_DATE}}`
 - **License, consent, or use boundary:** `{{DETAILS}}`
 - **Citation:** `{{COPY_READY_CITATION}}`
+- **Environment, compatibility, compute, storage, or cost boundary:** `{{DETAILS}}`
 - **Local manifest or checksum record:** `{{PATH_OR_NONE}}`
 
 Keep the templates until real entries replace them.

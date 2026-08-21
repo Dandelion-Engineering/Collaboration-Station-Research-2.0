@@ -28,8 +28,9 @@ programme, not a claim.
 **Claim boundary.** Name the stronger statement readers will extend your result
 to, and disclaim it here rather than in a limitations section nobody reaches.
 
-**Outcome map.** Success, failure, inconclusive, and non-transfer need
-observable conditions.
+**Outcome map.** Success, failure, inconclusive, non-transfer, blocked by
+unavailable evidence, and blocked by unavailable authority need observable
+conditions.
 
 - Weak: *the method performs meaningfully better than baseline.*
 - Strong: *a paired improvement of at least X on metric M across all N held-out
@@ -46,13 +47,28 @@ negative. Declare in advance what would make a null uninformative: sample size,
 model capacity, tuning budget, measurement floor, or coverage. Without that
 line, every negative result invites the argument that the attempt was too small.
 
+**Blocked** outcomes identify a missing prerequisite, not a vague difficulty.
+Unavailable evidence means the question could not be resolved after the
+declared proportionate search or attempt. Unavailable authority means the work
+requires a human-only action that was not authorized. In either case, name the
+bounded work that can still be completed and what would allow resumption.
+
 **Evidence roles.** State what makes held-out evidence held out, and when it
 becomes accessible. Once evidence has been inspected or tuned against, it is
 development evidence; relabelling it later does not restore it.
 
+**Materials and online resources.** If the seed supplies no inputs, name the
+public datasets, software, models, tools, repositories, or other resources the
+project will use or evaluate. Record fit, access path, version, provenance,
+license or consent, compatibility, and compute, storage, time, or cost limits.
+
 **Methods and baselines.** The strongest relevant comparison available under the
 project's constraints, not the most convenient one. A baseline that is easy to
 beat usually indicates the comparison was chosen after the method.
+
+State which parts of the approach are established, transferred from another
+field, adapted, or new. A new method must have tests capable of showing that the
+properties needed for the claim are actually correct.
 
 **Controls.** For each, ask what could produce this result even if the effect is
 not real — leakage, a shortcut feature, a confound, a trivial predictor,
@@ -60,7 +76,14 @@ selection — and name the check that would reveal it.
 
 **Capacity and stopping rules.** These separate *no effect* from *not enough
 attempt*, and they prevent an investigation from expanding until something
-works. Both are far easier to write honestly before results exist.
+works. Bound the literature search, cross-field transfer search, prototyping,
+tuning, and compute before results exist. Name the closest relevant feasible
+rung the project will take if the ideal path cannot meet its burden.
+
+**Researcher questions.** Every open question needs an entry in
+`Research/Questions.md`. Advisory questions carry a live default. Authority
+questions default to not taking the restricted action. A question that changes
+a contract boundary also needs a dated `Research/Changes.md` entry.
 
 **Outputs.** Every named output needs a reader, minimum content, and evidence of
 completion. If no reader can be named, do not name the output.
@@ -93,5 +116,9 @@ honest correction and a quietly loosened bar visible to a reader.
 - Success conditions stated as adjectives.
 - A failure condition no realistic result could meet.
 - An outcome map that omits inconclusive.
+- A blocked outcome that names no unavailable prerequisite or resumption path.
 - Materials listed without roles, licenses, or access rules.
+- A novel method whose correctness is assumed rather than tested.
+- A creative search with no effort ceiling or relevant fallback rung.
+- An open researcher question without an explicit default.
 - Outputs copied from another project rather than derived from this claim.

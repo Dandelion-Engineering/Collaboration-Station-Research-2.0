@@ -47,11 +47,28 @@ Runnable reproducibility packets remain appropriate for computational claims,
 but the mechanism may instead be a simulation, test harness, worked example,
 manifest, visual comparison, or another artifact suited to the project.
 
+### Proportionate ambition with a feasible rung
+
+The template does not equate rigor with maximum scale. Established science is
+used when it fits. Genuine method gaps receive a bounded creative attempt,
+including cross-field transfer or a new approach with a higher validation
+burden. If that attempt cannot support the ideal study within declared
+constraints, the project completes the closest relevant rung instead of either
+drifting to an unrelated easy question or declaring that no research is
+possible.
+
+When the seed supplies no inputs, agents explicitly search for suitable public
+datasets, software, models, tools, and other online resources. Fit, provenance,
+license, consent, compatibility, security, and practical resource cost remain
+part of the research decision rather than an afterthought.
+
 ### Mechanical coordination
 
 The Collaboration Station 2.0 chat, work-claim, and path-scoped closeout tools
-remain unchanged. They solve real shared-state problems without judging
-research quality.
+are inherited as universal mechanics. Closeout now treats a repository with no
+remote as an explicit local-only mode, while refusing to guess when a remote
+exists but the current branch has no upstream. These tools solve shared-state
+problems without judging research quality.
 
 ## What was transformed
 
@@ -88,6 +105,16 @@ verification path; those needs may be combined into fewer artifacts.
 output, or terminal state materially changes. Session summaries retain detailed
 chronology. This informs the director without manufacturing reports because a
 session counter fired.
+
+### Researcher availability → questions with defaults
+
+`Research/Questions.md` separates advice from authority. An advisory question
+records the defensible default already in force. An authority question defaults
+to not taking the restricted action. Answers and closures are appended as dated
+events under stable IDs, so an absent researcher never becomes a project-wide
+wait state and silence never becomes permission. A terminal
+`blocked by unavailable authority` result accounts honestly for any promised
+action or output the agents could not perform.
 
 ### Cross-model review → focused contribution
 

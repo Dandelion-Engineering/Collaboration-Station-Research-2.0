@@ -65,4 +65,8 @@ question, follow it. When it does not, choose the most honest and most
 reversible path, record the uncertainty where it affects the result or a future
 decision, and continue.
 
-The human director is not an arbiter of technical disagreement between agents.
+The researcher does not need to arbitrate technical disagreement between
+agents. When a research preference would materially improve fit, ask an
+advisory question with a live default. When action needs human-only authority,
+ask an authority question whose default is not to act. Record either kind in
+`Research/Questions.md` and continue on the available path.

@@ -225,6 +225,25 @@ def _closeout(root, args, index):
         say("REFUSED: %s is tracked. Remove it from version control and ignore it before trying again." % LOCK_NAME)
         return PROBLEM
 
+    rc, remote_output = git(root, "remote")
+    if rc != 0:
+        say("FAILED while reading configured Git remotes:\n%s" % remote_output)
+        return PROBLEM
+    remotes = [line.strip() for line in remote_output.splitlines() if line.strip()]
+    upstream = None
+    if remotes:
+        rc, upstream_output = git(
+            root, "rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"
+        )
+        if rc != 0 or not upstream_output.strip():
+            say("REFUSED: a Git remote is configured, but the current branch has no upstream.")
+            say("Configure the intended upstream before closeout so this tool cannot guess where to push.")
+            return PROBLEM
+        upstream = upstream_output.strip()
+    else:
+        say("No Git remote is configured. Closeout will commit locally and skip push.")
+        say("")
+
     rc, before = git(root, "status", "--short", index=index)
     say("Working tree before:")
     say(before if before else "  (clean)")
@@ -293,16 +312,28 @@ def _closeout(root, args, index):
             say(output.splitlines()[0] if output else "committed")
 
     say("")
-    rc, output = git(root, "push")
-    if rc == 0:
-        say("Pushed.")
-    elif "Everything up-to-date" in output:
-        say("Nothing to push.")
+    if upstream is None:
+        say("No remote configured; the closeout commit remains local.")
     else:
-        say("PUSH REFUSED. The remote differs from the local state.")
-        say(output.splitlines()[-1] if output else "")
-        say("This tool will not pull, rebase, merge, force-push, or resolve the divergence.")
-        return PROBLEM
+        rc, output = git(root, "push")
+        if rc == 0 and "Everything up-to-date" in output:
+            say("Nothing to push.")
+        elif rc == 0:
+            say("Pushed to %s." % upstream)
+        else:
+            lowered = output.lower()
+            divergence = any(
+                marker in lowered
+                for marker in ("non-fast-forward", "fetch first")
+            )
+            if divergence:
+                say("PUSH REFUSED. The upstream differs from the local state.")
+                say("This tool will not pull, rebase, merge, force-push, or resolve the divergence.")
+            else:
+                say("PUSH FAILED. Git could not update %s; the commit remains local." % upstream)
+                say("Resolve the reported Git or connection problem, then coordinate the next closeout.")
+            say(output.splitlines()[-1] if output else "")
+            return PROBLEM
 
     rc, after = git(root, "status", "--short")
     say("")

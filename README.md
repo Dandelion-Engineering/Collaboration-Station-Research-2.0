@@ -1,14 +1,16 @@
 # Collaboration Station Research 2.0
 
-A filesystem-native template for long-running exploratory research by a human
-director and capable AI agents.
+A filesystem-native template for long-running exploratory research by a
+researcher and capable AI agents.
 
 The researcher starts with one input: a seed idea in
 [`Project Details/Project Details.md`](Project%20Details/Project%20Details.md).
 It can be a single question, an unfinished thought, a detailed proposal, or a
 plan that already names methods and datasets. The agents turn that seed into a
 source-grounded Research Contract, conduct the investigation across sessions,
-and leave an honest, inspectable result.
+and leave an honest, inspectable result. When inputs are not supplied, agents
+look for suitable public datasets, software, models, tools, and other online
+resources within the project's access and resource constraints.
 
 The template is built on Collaboration Station 2.0. Its universal scaffold
 handles session continuity, subject-focused chats, concurrent write claims, and
@@ -30,7 +32,9 @@ find.
 The project follows a simple arc:
 
 1. **Frame and ground.** Agents interpret the seed, inspect the field, and find
-   the strongest relevant methods, baselines, controls, and evidence.
+   the strongest relevant methods, baselines, controls, evidence, and usable
+   resources. Established science is preferred when it fits; genuine gaps get
+   a bounded cross-field or novel-method attempt with a higher validation burden.
 2. **Contract.** Before designated confirmatory evidence is examined, the agents
    make the question, claim, evidence roles, evaluation, and success/failure
    boundaries explicit in `Research/Research Contract.md`.
@@ -39,9 +43,15 @@ The project follows a simple arc:
    them.
 4. **Conclude and communicate.** The result is reported at its true strength,
    including a clean negative, inconclusive, non-transfer, or evidence-blocked
-   outcome, with a proportionate way to inspect or reproduce it.
+   or authority-blocked outcome, with a proportionate way to inspect or
+   reproduce it.
 
-These are descriptions of work, not approval gates.
+If the ideal study is infeasible, the project steps down to the closest useful
+rung that still serves the seed—such as a feasibility study, data audit,
+benchmark, simulation, method prototype, experimental design, or proof of a
+current limit. It does not stop at the claim that no research can be done.
+
+These stages may overlap when evidence roles remain clear.
 
 ## The research layer
 
@@ -53,8 +63,11 @@ Research/
 ├── Research Contract.md       Active question, claim, evidence roles, methods,
 │                              outcome boundaries, and required outputs
 ├── Changes.md                 Dated append-only consequential changes
+├── Questions.md               Append-only questions, defaults, answers,
+│                              and closures
 ├── Status.md                  Compact current state for the researcher
-└── References.md              Sources, datasets, licenses, and provenance
+└── References.md              Sources, datasets, software, tools, licenses,
+                               and provenance
 
 Outputs/
 └── README.md                  Flexible destination for project deliverables
@@ -72,28 +85,29 @@ The Research Contract makes the intended question visible before results can
 quietly reshape it. It requires the project to name:
 
 - the bounded question and intended claim;
-- success, failure, inconclusive, and non-transfer outcomes;
+- success, failure, inconclusive, non-transfer, unavailable-evidence, and
+  unavailable-authority outcomes;
 - evidence roles and access boundaries;
 - primary methods, strongest relevant alternatives, and controls;
 - metrics, uncertainty, robustness checks, and stopping rules;
 - required outputs and the smallest sufficient verification path.
 
 When evidence invalidates part of the plan, the current contract is updated and
-the reason is appended to `Research/Changes.md`. The change record—not an AI
-signature—is what makes drift visible.
+the reason is appended to `Research/Changes.md`. The dated change record keeps
+the movement visible.
 
-## Collaboration without certification loops
+## Collaboration on important work
 
 Agents own their work and move it forward. Another model family may provide an
 independent approach, a counterexample, difficult technical help, or one
 focused improvement pass when that adds information. The responsible agent
 uses what improves the work and continues.
 
-The template has no fixed writer/reviewer roles, mandatory cross-review, Review
-Cards, exact-state AI approval, repeated review rounds, dual signatures, or
-consensus requirement for ordinary progress. Research protection comes from
-predeclared boundaries, strong controls, visible changes, evidence provenance,
-adversarial testing, and reproducible checks matched to the claim.
+Research protection comes from predeclared boundaries, strong controls, visible
+changes, evidence provenance, adversarial testing, and reproducible checks
+matched to the claim. `Research/Questions.md` lets agents ask the researcher
+without waiting: advisory questions carry a live default, while authority
+questions default to not taking the restricted action.
 
 ## Outputs fit the project
 

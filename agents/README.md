@@ -10,8 +10,7 @@ A typical workspace contains:
 agents/<AgentName>/
 ├── README.md
 ├── Summary of Only Necessary Context.md
-├── Session Summaries/
-└── Progress Reports/          # only when the project uses them
+└── Session Summaries/
 ```
 
 Projects and agents may add research notes, references, scratch analyses, or other durable material when useful.

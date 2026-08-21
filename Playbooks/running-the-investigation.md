@@ -14,6 +14,18 @@ it will judge are fixed.
 Record when protected evidence first becomes accessible if that knowledge could
 influence a later choice.
 
+## Hold new methods to their declared burden
+
+When the contract relies on a transferred, adapted, or new method, test the
+properties the claim needs before treating its outputs as evidence. Use known
+cases, strong established alternatives, ablations, invariants, simulations, or
+other controls capable of exposing a plausible but wrong solution.
+
+If the method does not meet that burden within the declared effort and resource
+ceiling, take the contract's closest relevant feasible rung. Record any moved
+research boundary in `Research/Changes.md`; do not extend search or tuning until
+something appears to work.
+
 ## A failed validation is a stop-or-go point
 
 When a check that was supposed to pass does not, diagnose it before continuing.

@@ -55,6 +55,14 @@ conditions, not adjectives such as "good" or "meaningful" without a rule.
 
 `{{CONDITIONS_UNDER_WHICH_THE_RESULT_DOES_NOT_GENERALIZE}}`
 
+### Blocked by unavailable evidence
+
+`{{EVIDENCE_ABSENCE_THAT_CAN_PREVENT_RESOLUTION_DESPITE_A_PROPORTIONATE_ATTEMPT}}`
+
+### Blocked by unavailable authority
+
+`{{HUMAN_ONLY_ACTION_WHOSE_ABSENCE_CAN_PREVENT_A_PROMISED_ACTION_OR_OUTPUT}}`
+
 ## 3. Materials and evidence roles
 
 | Material or source | Role | Access or split rule | Eligibility and exclusions | License / consent / provenance |
@@ -64,11 +72,24 @@ conditions, not adjectives such as "good" or "meaningful" without a rule.
 Record when confirmatory or held-out evidence first becomes accessible if that
 knowledge could shape methods or thresholds.
 
+When the seed supplies no materials, record the public datasets, software,
+models, tools, or other online resources considered and why the selected ones
+fit. Verify version, license, consent, provenance, compatibility, security, and
+practical cost before depending on them.
+
 ## 4. Methods, alternatives, and controls
 
 ### Primary approach
 
 `{{METHOD_AND_WHY_IT_FITS_THE_QUESTION}}`
+
+### Established basis, transferable ideas, and novelty
+
+`{{WHAT_IS_ESTABLISHED_WHAT_WAS_BORROWED_FROM_ANOTHER_FIELD_AND_WHAT_IF_ANYTHING_IS_NEW}}`
+
+For any new method, name the properties that must be established before it can
+support the intended claim and the tests, controls, or known cases that will
+establish them.
 
 ### Strongest relevant baselines or alternatives
 
@@ -108,7 +129,7 @@ knowledge could shape methods or thresholds.
 
 ### Interpretation rules
 
-`{{HOW_RESULTS_MAP_TO_SUCCESS_FAILURE_INCONCLUSIVE_OR_NON_TRANSFER_WITHOUT_POST_HOC_PROMOTION}}`
+`{{HOW_RESULTS_MAP_TO_SUCCESS_FAILURE_INCONCLUSIVE_NON_TRANSFER_OR_BLOCKED_WITHOUT_POST_HOC_PROMOTION}}`
 
 ## 6. Operational plan
 
@@ -118,6 +139,14 @@ knowledge could shape methods or thresholds.
 2. `{{READY_UNIT}}`
 3. `{{READY_UNIT}}`
 
+### Resource discovery and acquisition plan
+
+`{{NAMED_OR_PUBLIC_DATASETS_SOFTWARE_MODELS_TOOLS_MATERIALS_ACCESS_PATHS_AND_FALLBACKS}}`
+
+### Creative search and scope fallback
+
+`{{BOUNDED_CROSS_FIELD_SEARCH_NEW_METHOD_ATTEMPT_STOPPING_RULE_AND_CLOSEST_RELEVANT_FEASIBLE_RUNG}}`
+
 ### Compute, time, and resource ceiling
 
 `{{AVAILABLE_ENVIRONMENT_AND_LIMITS}}`
@@ -125,6 +154,10 @@ knowledge could shape methods or thresholds.
 ### Safety, privacy, legal, and human-only boundaries
 
 `{{BOUNDARIES_AND_ANY_REQUIRED_HUMAN_ACTION}}`
+
+Any question to the researcher, its default, and any answer is recorded in
+`Research/Questions.md`. Unanswered authority questions default to not taking
+the restricted action.
 
 ## 7. Required outputs and inspectability
 
@@ -136,10 +169,15 @@ Name only outputs with a real reader or boundary to serve.
 | Reproduction or verification path | `{{READER}}` | `{{RUNBOOK_TEST_HARNESS_SIMULATION_WORKED_EXAMPLE_OR_OTHER}}` | `{{WHAT_WILL_BE_RUN_OR_CHECKED}}` |
 | `{{OPTIONAL_OUTPUT}}` | `{{READER_AND_PURPOSE}}` | `{{MINIMUM_CONTENT}}` | `{{EVIDENCE}}` |
 
+For a terminal evidence- or authority-blocked outcome, the final result record
+must identify the unavailable prerequisite, each promised output it prevented,
+the bounded work completed, and what would allow a successor to resume.
+
 ### Source and data provenance
 
-`Research/References.md` records sources, datasets, licenses, and the decisions
-they informed. Additional manifests or data cards required:
+`Research/References.md` records sources, datasets, software, models, tools,
+materials, licenses, and the decisions they informed. Additional manifests or
+data cards required:
 
 `{{ADDITIONAL_PROVENANCE_ARTIFACTS_OR_NONE}}`
 
@@ -156,14 +194,21 @@ These will be recorded in:
 ## Activation checklist
 
 - [ ] The question and intended claim are bounded.
-- [ ] Success, failure, inconclusive, and non-transfer conditions are explicit.
+- [ ] Success, failure, inconclusive, non-transfer, unavailable-evidence, and
+  unavailable-authority conditions are explicit.
 - [ ] Important evidence has a declared role and access rule.
-- [ ] Methods, strongest baselines, controls, metrics, and stopping rules are source-grounded.
+- [ ] Methods, strongest baselines, controls, metrics, and stopping rules are
+  source-grounded.
+- [ ] Named or public datasets, software, models, tools, and materials have fit,
+  access, provenance, license, and resource constraints recorded.
+- [ ] Any novel method has a proportionate validation plan, and the closest
+  relevant feasible fallback is named.
 - [ ] Exclusions, deviations, and uncertainty handling are specified.
 - [ ] Required outputs and their readers are named.
 - [ ] Human-only, safety, privacy, legal, compute, and budget boundaries are clear.
+- [ ] Open researcher questions have explicit defaults in `Research/Questions.md`.
 - [ ] Every `{{DOUBLE_BRACED_PLACEHOLDER}}` has been replaced.
 
 When the checklist is satisfied, set **Status** to `Active`, set version `1.0`,
-and record the activation date. Activation is a research-state transition, not
-an AI approval event.
+and record the activation date. From that point, the declared confirmatory and
+held-out evidence rules are in force.

@@ -6,8 +6,9 @@ Read this when producing the outputs the Research Contract promised.
 
 Every project leaves one artifact that answers the research question. It states
 which outcome occurred — success, failure, inconclusive, non-transfer, or
-blocked by unavailable evidence — and carries the methods, comparisons,
-exclusions, deviations, and limitations needed to understand that answer.
+blocked by unavailable evidence or unavailable authority — and carries the
+methods, comparisons, exclusions, deviations, and limitations needed to
+understand that answer.
 
 Small projects can satisfy this with a single report. Larger ones may separate
 it into a technical account, a public explanation, and supporting records. The
@@ -44,6 +45,18 @@ protects the next investigator from repeating it.
 An inconclusive result should state precisely what prevented resolution and what
 a successor would need — more data, more capacity, a different measurement, a
 different question.
+
+A blocked result is also bounded and specific. Name the unavailable evidence or
+human-only authority, what was tried within the declared resource ceiling, each
+promised output the missing prerequisite prevented, what useful work was still
+completed, and the exact condition under which a successor could resume. Do not
+describe an unauthorized action as pending permission if the project can
+conclude honestly without it.
+
+If the ideal rung was infeasible, report the closest relevant rung that was
+completed and how it still serves the seed. Do not flatten a feasibility study,
+data audit, method prototype, simulation, or proof of a current limit into the
+claim that no research was possible.
 
 Do not rescue a result by relaxing the outcome map after seeing it. If a
 boundary genuinely needs to move, it moves through a dated entry in
