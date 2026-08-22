@@ -154,11 +154,24 @@ def acquire_lock(lock_path: Path, agent: str, timeout: int, poll: float = 0.2) -
             time.sleep(poll)
 
 
-def release_lock(lock_path: Path) -> None:
-    try:
-        lock_path.unlink()
-    except FileNotFoundError:
-        pass
+def release_lock(lock_path: Path, timeout: float = 2.0, poll: float = 0.02) -> None:
+    """Release a lock after transient Windows readers let go of the file.
+
+    A waiter reads the lock metadata before polling. On Windows that brief read
+    can deny deletion, so a winner that immediately unlinks may otherwise leave
+    a completed claim and a stranded lock behind.
+    """
+    deadline = time.monotonic() + max(0.0, timeout)
+    while True:
+        try:
+            lock_path.unlink()
+            return
+        except FileNotFoundError:
+            return
+        except PermissionError:
+            if time.monotonic() >= deadline:
+                raise
+            time.sleep(poll)
 
 
 @dataclass
