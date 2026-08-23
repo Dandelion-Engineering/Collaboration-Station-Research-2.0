@@ -1,5 +1,29 @@
 # Collaboration Station Research 2.0
 
+> ## Testing status
+>
+> This is an early, actively tested successor to the original
+> [Collaboration Station Research](https://github.com/Dandelion-Engineering/Collaboration-Station-Research)
+> framework. Newer AI models broke a central assumption of that design. Its
+> mandatory cross-review, repeated verification, and same-state approval loops
+> were meant to compensate for agents that did not reliably check their own
+> work. Current models already verify and self-correct much more aggressively;
+> layering the old instructions on top caused careful agents to spend more time
+> reviewing plans and specifications than executing research.
+>
+> Version 2.0 removes fixed reviewer roles, recurring review cycles, and AI
+> approval gates. It trusts agents to move the work forward, correct errors as
+> execution exposes them, and verify in proportion to the consequences. It
+> retains the protections that bear scientific claims: explicit evidence
+> boundaries, strong controls, source provenance, visible consequential changes,
+> and reproducible checks matched to the claim.
+>
+> **The framework is still in testing.** Preliminary use is promising for its
+> intended operational change—less recursive review and more forward motion—but
+> it has not yet accumulated enough completed projects to establish reliability
+> across research domains, datasets, or future agent versions. Expect the
+> framework to evolve as those tests expose what works and what does not.
+
 A filesystem-native template for long-running exploratory research by a
 researcher and capable AI agents.
 
