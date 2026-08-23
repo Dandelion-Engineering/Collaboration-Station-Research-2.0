@@ -8,6 +8,8 @@ authors:
   - family-names: Crespo
     given-names: Randy
     affiliation: Dandelion Engineering
+repository-code: "https://github.com/Dandelion-Engineering/Collaboration-Station-Research-2.0"
+url: "https://github.com/Dandelion-Engineering/Collaboration-Station-Research-2.0"
 abstract: >-
   Collaboration Station Research 2.0 is a filesystem-native template for
   long-running exploratory research by a human director and capable AI agents.

@@ -36,9 +36,11 @@ and leave an honest, inspectable result. When inputs are not supplied, agents
 look for suitable public datasets, software, models, tools, and other online
 resources within the project's access and resource constraints.
 
-The template is built on Collaboration Station 2.0. Its universal scaffold
-handles session continuity, subject-focused chats, concurrent write claims, and
-path-scoped Git closeout. This repository adds only the research layer.
+The template is built on
+[Collaboration Station 2.0](https://github.com/Dandelion-Engineering/Collaboration-Station-2.0).
+Its universal scaffold handles session continuity, subject-focused chats,
+concurrent write claims, and path-scoped Git closeout. This repository adds
+only the research layer.
 
 ## Start a project
 
