@@ -1,40 +1,26 @@
 # Collaboration Station Research 2.0
 
-> ## Testing status
+> ## Experimental framework: not recommended for actual research
 >
-> This is an early, actively tested successor to the original
-> [Collaboration Station Research](https://github.com/Dandelion-Engineering/Collaboration-Station-Research)
-> framework. Newer AI models broke a central assumption of that design. Its
-> mandatory cross-review, repeated verification, and same-state approval loops
-> were meant to compensate for agents that did not reliably check their own
-> work. Current models already verify and self-correct much more aggressively;
-> layering the old instructions on top caused careful agents to spend more time
-> reviewing plans and specifications than executing research.
+> **Context updated October 2026.** This is an experimental successor to [Collaboration Station Research](https://github.com/Dandelion-Engineering/Collaboration-Station-Research). Dandelion Engineering considers both versions likely unsuitable for actual scientific research in their current forms. Version 2.0 removes fixed reviewer roles and recurring approval loops that contributed to stalled work in earlier projects, but that operational change does not establish scientific reliability.
 >
-> Version 2.0 removes fixed reviewer roles, recurring review cycles, and AI
-> approval gates. It trusts agents to move the work forward, correct errors as
-> execution exposes them, and verify in proportion to the consequences. It
-> retains the protections that bear scientific claims: explicit evidence
-> boundaries, strong controls, source provenance, visible consequential changes,
-> and reproducible checks matched to the claim.
+> Agents can check and revise their work while still misunderstanding a question, choosing unsuitable methods, or drawing unsupported conclusions. Researcher involvement is needed throughout the investigation, including decisions about direction, interpretation, and what evidence is sufficient. The phases below are an organizing aid, not a claim that research follows a predictable linear path.
 >
-> **The framework is still in testing.** Preliminary use is promising for its
-> intended operational change—less recursive review and more forward motion—but
-> it has not yet accumulated enough completed projects to establish reliability
-> across research domains, datasets, or future agent versions. Expect the
-> framework to evolve as those tests expose what works and what does not.
+> The template retains evidence boundaries, controls, source provenance, and reproducibility checks. Its effectiveness across projects has not been established. It remains available for inspection and experimentation, not as a recommended workflow for conducting actual research.
+>
+> This replacement status note and the accompanying introductory wording update were drafted by AI.
 
 A filesystem-native template for long-running exploratory research by a
 researcher and capable AI agents.
 
-The researcher starts with one input: a seed idea in
+The template is designed for the researcher to record a starting idea in
 [`Project Details/Project Details.md`](Project%20Details/Project%20Details.md).
-It can be a single question, an unfinished thought, a detailed proposal, or a
-plan that already names methods and datasets. The agents turn that seed into a
-source-grounded Research Contract, conduct the investigation across sessions,
-and leave an honest, inspectable result. When inputs are not supplied, agents
-look for suitable public datasets, software, models, tools, and other online
-resources within the project's access and resource constraints.
+It can be a question, an unfinished thought, or a more developed proposal.
+Agents help ground it in sources, develop a Research Contract, and carry out
+the investigation across sessions. A seed idea is a starting point, not the
+researcher's only contribution: direction, assumptions, and interpretation
+need ongoing attention. When inputs are not supplied, agents can look for
+public datasets and tools within the project's access and resource constraints.
 
 The template is built on
 [Collaboration Station 2.0](https://github.com/Dandelion-Engineering/Collaboration-Station-2.0).
